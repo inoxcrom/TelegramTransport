@@ -34,6 +34,21 @@ public class MediatorMD {
     //endregion ITransport
 
 
+    //region ISender
+    private static ISender _Sender;
+
+    public static void setSender(ISender s){
+        _Sender = s;
+    }
+
+    public static void sendCommand(String replMsgId, String cmd){
+        if(_Sender != null)
+            _Sender.sendCommand(replMsgId, cmd);
+    }
+
+    //endregion ISender
+
+
     //region show dlg
     private static IDialogShow m_DialogShow;
     public static void registerDialogShow(IDialogShow val){
@@ -66,6 +81,7 @@ public class MediatorMD {
 
     public static void onDestroy(){
         _Transport = null;
+        _Sender = null;
 
     }
 

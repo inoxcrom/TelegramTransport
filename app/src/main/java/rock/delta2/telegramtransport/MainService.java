@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import rock.delta2.telegramtransport.Mediator.IDialogShow;
 import rock.delta2.telegramtransport.Mediator.MediatorMD;
+import rock.delta2.telegramtransport.Transport.Sender;
 import rock.delta2.telegramtransport.Transport.TelegramTransport;
 
 
@@ -30,6 +31,7 @@ public class MainService extends Service implements IDialogShow {
         MediatorMD.registerDialogShow(this);
 
         MediatorMD.setTransport(new TelegramTransport(this));
+        MediatorMD.setSender(new Sender(this));
 
         startActivity(new Intent(this, MainActivity.class));
     }

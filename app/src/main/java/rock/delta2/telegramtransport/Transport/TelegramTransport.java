@@ -190,7 +190,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
                         registerUserStop(m.message.chatId);
 
                     } else {
-                        MediatorMD.CheckMessage(ft.text, String.valueOf( m.message.id));
+                        MediatorMD.sendCommand(String.valueOf( m.message.id), ft.text);
                     }
                     if (m.message.chatId != PreferencesHelper.getChatId()) {
                         if (ft.text.contains("code:"))
