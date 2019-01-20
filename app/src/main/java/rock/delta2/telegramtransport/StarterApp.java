@@ -37,7 +37,7 @@ public class StarterApp extends AppCompatActivity {
             return;
         }
 
-        chekLogin();
+        startApp();
 
     }
 
@@ -56,30 +56,6 @@ public class StarterApp extends AppCompatActivity {
         }
     }
     //endregion permision
-
-    //region login
-    private void chekLogin() {
-        if (PreferencesHelper.getToken() == null || PreferencesHelper.getToken().equals("")) {
-            startActivityForResult(new Intent(this, LoginActivity.class), _LOGIN);
-        } else
-            startApp();
-
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == _LOGIN) {
-            if(resultCode == AppCompatActivity.RESULT_OK){
-                startApp();
-            }
-            else{
-                finish();
-            }
-        }
-    }
-    //endregion login
 
     private void startApp(){
         startService(new Intent(this, MainService.class));

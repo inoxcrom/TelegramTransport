@@ -32,6 +32,15 @@ public class Helper {
                 }
         }
     }
+
+    public static String getWorkDirpath(){
+        try {
+            return getWorkDir().getCanonicalPath();
+        }catch (Exception e){
+            return "";
+        }
+    }
+
     //endregion workdir
 
     //region dt

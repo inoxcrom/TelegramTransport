@@ -4,6 +4,8 @@ package rock.delta2.telegramtransport.Mediator;
 public interface ITransport {
 
 
+    void connect();
+
     // rock.delta2.send.txt
     void sendTxt(String replMsgId, String msg);
 
