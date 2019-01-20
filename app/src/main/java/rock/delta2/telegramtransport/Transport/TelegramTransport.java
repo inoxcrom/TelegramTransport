@@ -38,7 +38,10 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
     long lastMsgId = 0;
 
     public TelegramTransport (Context c){
+        _context = c;
+        _client = Client.create(this, this, this);
 
+        connect();
     }
 
 
@@ -57,7 +60,8 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
         if (object instanceof TdApi.AuthorizationStateWaitPhoneNumber && !isWaitPhone) {
             isWaitPhone = true;
             PreferencesHelper.SetPhoneNum("");
-        //    _callback.onConnectedTransport(false);
+            register();
+
         }
         else if (isWaitPhone && !PreferencesHelper.getPhoneNum().equals("")){
             isWaitPhone = false;
@@ -69,7 +73,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
         else if (object instanceof TdApi.AuthorizationStateWaitCode && !isWaitCode) {
             isWaitCode = true;
             PreferencesHelper.code = "";
-        //    _callback.onConnectedTransport(false);
+            register();
         }
         else if (isWaitCode && !PreferencesHelper.code.equals("")){
             isWaitCode = false;
@@ -84,7 +88,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
             TdApi.AuthorizationStateWaitPassword o = (TdApi.AuthorizationStateWaitPassword)object;
 
             passHint = o.passwordHint;
-      //      _callback.onConnectedTransport(false);
+            register();
         }
         else if(isWaitPass && !PreferencesHelper.pass.equals("")){
             isWaitPass = false;
