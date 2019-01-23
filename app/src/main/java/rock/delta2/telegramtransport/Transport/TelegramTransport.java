@@ -277,6 +277,9 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
     //region ITransport
     @Override
     public void sendTxt(String replMsgId, String msg) {
+        if (!PreferencesHelper.getSendText())
+            return;
+
         Helper.Log("tdlib-sendTxt ", msg);
 
         try {
@@ -322,6 +325,8 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
     @Override
     public void sendPhoto(String replMsgId, String file, String caption) {
+        if (!PreferencesHelper.getSendPhoto())
+            return;
         try {
             Helper.Log("tdlib-sendPhoto", file);
             if (PreferencesHelper.existsChatId()) {
@@ -354,6 +359,9 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
     @Override
     public void sendFile(String replMsgId, String file) {
+        if (!PreferencesHelper.getSendFile())
+            return;
+
         try {
             Helper.Log("tdlib-sendFile ", file);
             if (PreferencesHelper.existsChatId()) {

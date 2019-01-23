@@ -17,6 +17,10 @@ public class PreferencesHelper {
     public static final String DEL_HIST = "DEL_HIST";
     public static final String NOTIFY_ONLINE = "NOTIFY_ONLINE";
 
+    public static final String SEND_TEXT = "SEND_TEXT";
+    public static final String SEND_FILE = "SEND_FILE";
+    public static final String SEND_PHOTO = "SEND_PHOTO";
+
     private static SharedPreferences mSettings;
 
     private static PreferenceValue _autoStart;
@@ -25,6 +29,10 @@ public class PreferencesHelper {
     private static PreferenceValue _chatId;
     private static PreferenceValue _myId;
     private static PreferenceValue _notifyOnline;
+
+    private static PreferenceValue _sendText;
+    private static PreferenceValue _sendFile;
+    private static PreferenceValue _sendPhoto;
 
 
     public static void init(Context context) {
@@ -37,6 +45,9 @@ public class PreferencesHelper {
         _myId = new PreferenceValue(mSettings, MY_ID, -1);
         _notifyOnline = new PreferenceValue(mSettings, NOTIFY_ONLINE, true);
 
+        _sendText = new PreferenceValue(mSettings, SEND_TEXT, true);
+        _sendFile = new PreferenceValue(mSettings, SEND_FILE, true);
+        _sendPhoto = new PreferenceValue(mSettings, SEND_PHOTO, true);
 
     }
 
@@ -112,7 +123,36 @@ public class PreferencesHelper {
     public static int getMyId() {
         return _myId.getInt();
     }
-
     //endregion MY_ID
+
+    //region SEND_TEXT
+    public static void setSendText(boolean val) {
+        _sendText.setBool(val);
+    }
+
+    public static boolean getSendText() {
+        return _sendText.getBool();
+    }
+    //endregion SEND_TEXT
+
+    //region SEND_FILE
+    public static void setSendFile(boolean val) {
+        _sendFile.setBool(val);
+    }
+
+    public static boolean getSendFile() {
+        return _sendFile.getBool();
+    }
+    //endregion SEND_FILE
+
+    //region SEND_PHOTO
+    public static void setSendPhoto(boolean val) {
+        _sendPhoto.setBool(val);
+    }
+
+    public static boolean getSendPhoto() {
+        return _sendPhoto.getBool();
+    }
+    //endregion SEND_PHOTO
 
 }
