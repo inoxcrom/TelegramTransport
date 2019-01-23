@@ -231,7 +231,6 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
             s.putExtra(LoginActivity._PARAM_PASSHINT_VAL, passHint);
         }
 
-
         _context.startActivity (s);
 
     }
