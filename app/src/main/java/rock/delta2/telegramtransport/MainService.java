@@ -26,14 +26,17 @@ public class MainService extends Service implements IDialogShow {
 
     @Override
     public void onCreate() {
-        startForeground(R.drawable.ic_notify_proc, "dropbox transport", 4523);
+        startForeground(R.drawable.ic_notify_proc, "dropbox transport", 7512);
 
         MediatorMD.registerDialogShow(this);
 
         MediatorMD.setTransport(new TelegramTransport(this));
         MediatorMD.setSender(new Sender(this));
 
-        startActivity(new Intent(this, MainActivity.class));
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+
     }
 
 
@@ -45,7 +48,7 @@ public class MainService extends Service implements IDialogShow {
     protected  void startForeground(int ico, String title, int notifyId) {
 
             Notification.Builder builder = new Notification.Builder(this)
-                    .setSmallIcon(ico)
+                    //.setSmallIcon(ico)
                     .setContentTitle(title)
                     .setContentText("")
                     .setOnlyAlertOnce(true)
