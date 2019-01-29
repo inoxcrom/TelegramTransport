@@ -26,7 +26,7 @@ public class MainService extends Service implements IDialogShow {
 
     @Override
     public void onCreate() {
-        startForeground(R.drawable.ic_notify_proc, "dropbox transport", 7512);
+        startForeground(R.drawable.ic_notify_proc, "telegram transport", 7512);
 
         MediatorMD.registerDialogShow(this);
 
