@@ -29,5 +29,15 @@ public class CommandReceiver extends BroadcastReceiver {
             String file = intent.getStringExtra("file");
             MediatorMD.sendFile(msgId, file);
         }
+        else if (intent.getAction().equals("rock.delta2.send.location"))
+        {
+            String msgId = intent.getStringExtra("replMsgId");
+            String lat = intent.getStringExtra("lat");
+            String lon = intent.getStringExtra("lon");
+
+
+            MediatorMD.sendFile(msgId, file);
+        }
+
     }
 }

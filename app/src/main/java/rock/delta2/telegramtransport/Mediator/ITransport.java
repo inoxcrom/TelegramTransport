@@ -16,7 +16,7 @@ public interface ITransport {
     void sendFile(String replMsgId, String file);
 
     // rock.delta2.send.location
-    //void sendLocation(String replMsgId, String lat, String lon);
+    void sendLocation(String replMsgId, String lat, String lon);
 
     // rock.delta2.call.voice
     //void callVoice();

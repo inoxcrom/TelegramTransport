@@ -31,6 +31,8 @@
                 <action android:name="rock.delta2.send.txt" />
                 <action android:name="rock.delta2.send.photo"/>
                 <action android:name="rock.delta2.send.file"/>
+                <action android:name="rock.delta2.send.location"/>
+
             </intent-filter>
         </receiver>
 

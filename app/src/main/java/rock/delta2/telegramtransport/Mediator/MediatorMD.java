@@ -30,6 +30,11 @@ public class MediatorMD {
             _Transport.sendFile(replMsgId, file);
     }
 
+    public static void sendLocation(String replMsgId, String lat, String lon){
+        if(_Transport != null)
+            _Transport.sendLocation (replMsgId, lat, lon);
+    }
+
 
     //endregion ITransport
 

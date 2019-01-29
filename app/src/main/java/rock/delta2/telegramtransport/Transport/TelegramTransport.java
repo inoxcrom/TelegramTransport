@@ -385,6 +385,41 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
         }
     }
 
+    @Override
+    public void sendLocation(String replMsgId, String lat, String lon) {
+        if (!PreferencesHelper.getSendFile())
+            return;
+
+        try {
+
+            double dlat = Double.valueOf(lat);
+            double dlan = Double.valueOf(lon);
+
+            if (PreferencesHelper.existsChatId()) {
+
+                long rplId = 0;
+
+                try {
+                    Long.valueOf(replMsgId);
+                }catch (Exception e){}
+
+                Thread.sleep(1100);
+
+
+                TdApi.Location l = new TdApi.Location(dlat, dlan);
+                TdApi.MessageLocation m = new TdApi.MessageLocation(l,)
+
+
+                TdApi.SendMessage request = new TdApi.SendMessage(PreferencesHelper.getChatId()
+                        , rplId, false, false, null, m);
+                send2t(request);
+
+            }
+        } catch (Exception e) {
+            Helper.Ex2Log(e);
+        }
+    }
+
     void send2t(TdApi.Function query) {
         if (_client != null) {
             Helper.Log("tdlib send", query.toString());
