@@ -132,11 +132,11 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
         }
 
         else if(object instanceof TdApi.UpdateNewChat){
-            if (!PreferencesHelper.existsChatId()) {
-                setConnectFlag();
-                TdApi.UpdateNewChat c = (TdApi.UpdateNewChat) object;
-                PreferencesHelper.SetChatId(c.chat.id);
-            }
+            //if (!PreferencesHelper.existsChatId()) {
+            //    setConnectFlag();
+            //    TdApi.UpdateNewChat c = (TdApi.UpdateNewChat) object;
+            //    PreferencesHelper.SetChatId(c.chat.id);
+            //}
 
         }
 
@@ -257,6 +257,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
         _context.startActivity(s);
     }
     private void registerUserStop(long chatId){
+
         PreferencesHelper.SetChatId(chatId);
         LoginActivity.close();
         connect();
@@ -407,8 +408,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
 
                 TdApi.Location l = new TdApi.Location(dlat, dlan);
-                TdApi.MessageLocation m = new TdApi.MessageLocation(l,)
-
+                TdApi.InputMessageLocation  m = new TdApi.InputMessageLocation(l, 10)  ;
 
                 TdApi.SendMessage request = new TdApi.SendMessage(PreferencesHelper.getChatId()
                         , rplId, false, false, null, m);

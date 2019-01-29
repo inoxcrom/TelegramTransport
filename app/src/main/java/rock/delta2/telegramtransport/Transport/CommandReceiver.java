@@ -36,7 +36,7 @@ public class CommandReceiver extends BroadcastReceiver {
             String lon = intent.getStringExtra("lon");
 
 
-            MediatorMD.sendFile(msgId, file);
+            MediatorMD.sendLocation(msgId, lat, lon);
         }
 
     }
