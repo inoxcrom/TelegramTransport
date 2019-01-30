@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox cbText;
     CheckBox cbPhoto;
     CheckBox cbFile;
+    CheckBox cbLocation;
     CheckBox cbAutoStart;
     Button btClose;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         cbText  = findViewById(R.id.cbText);
         cbFile  = findViewById(R.id.cbFile);
         cbPhoto = findViewById(R.id.cbPhoto);
+        cbLocation = findViewById(R.id.cbLocation);
         cbAutoStart = findViewById(R.id.cbAutoStart);
         btClose = findViewById(R.id.btClose);
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         cbFile.setChecked(PreferencesHelper.getSendFile());
         cbPhoto.setChecked(PreferencesHelper.getSendPhoto());
         cbAutoStart.setChecked(PreferencesHelper.getAutoStart());
+        cbLocation.setChecked(PreferencesHelper.getSendLocation());
     }
 
     public void onClick(View view) {
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             PreferencesHelper.setSendPhoto(cbPhoto.isChecked());
         else if (view.equals(cbAutoStart))
             PreferencesHelper.setAutoStart(cbAutoStart.isChecked());
+        else if (view.equals(cbLocation))
+        PreferencesHelper.setSendLocation(cbLocation.isChecked());
     }
 
     public void onCloseClick(View view) {

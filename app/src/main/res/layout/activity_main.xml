@@ -44,6 +44,14 @@
             />
 
         <CheckBox
+            android:id="@+id/cbLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:onClick="onClick"
+            />
+
+        <CheckBox
             android:id="@+id/cbAutoStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

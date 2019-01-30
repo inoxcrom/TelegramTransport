@@ -8,7 +8,7 @@ public class PreferencesHelper {
 
     public static final String APP_PREFERENCES = "preference";
 
-    public static final String ACCESS_TOKEN = "ACCESS_TOKEN";
+
     public static final String DEVICE_NAME = "DEVICE_NAME";
     public static final String AUTO_START = "AUTO_START";
     public static final String PHONE_NUM = "PHONE_NUM";
@@ -20,6 +20,7 @@ public class PreferencesHelper {
     public static final String SEND_TEXT = "SEND_TEXT";
     public static final String SEND_FILE = "SEND_FILE";
     public static final String SEND_PHOTO = "SEND_PHOTO";
+    public static final String SEND_LOCATION = "SEND_LOCATION";
 
     private static SharedPreferences mSettings;
 
@@ -33,6 +34,7 @@ public class PreferencesHelper {
     private static PreferenceValue _sendText;
     private static PreferenceValue _sendFile;
     private static PreferenceValue _sendPhoto;
+    private static PreferenceValue _sendLocation;
 
 
     public static void init(Context context) {
@@ -48,6 +50,7 @@ public class PreferencesHelper {
         _sendText = new PreferenceValue(mSettings, SEND_TEXT, true);
         _sendFile = new PreferenceValue(mSettings, SEND_FILE, true);
         _sendPhoto = new PreferenceValue(mSettings, SEND_PHOTO, true);
+        _sendLocation = new PreferenceValue(mSettings, SEND_LOCATION, true);
 
     }
 
@@ -154,5 +157,15 @@ public class PreferencesHelper {
         return _sendPhoto.getBool();
     }
     //endregion SEND_PHOTO
+
+    //region SEND_LOCATION
+    public static void setSendLocation(boolean val) {
+        _sendLocation.setBool(val);
+    }
+
+    public static boolean getSendLocation() {
+        return _sendLocation.getBool();
+    }
+    //endregion SEND_LOCATION
 
 }

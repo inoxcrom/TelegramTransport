@@ -388,7 +388,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
     @Override
     public void sendLocation(String replMsgId, String lat, String lon) {
-        if (!PreferencesHelper.getSendFile())
+        if (!PreferencesHelper.getSendLocation())
             return;
 
         try {

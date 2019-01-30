@@ -27,6 +27,7 @@
     <string name="text">text</string>
     <string name="file">file</string>
     <string name="photo">file</string>
+    <string name="location">location</string>
 
     <string name="auto_start">Auto start</string>
     <string name="reset_registration">reset registration</string>
