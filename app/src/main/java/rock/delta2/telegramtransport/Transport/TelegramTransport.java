@@ -408,7 +408,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
 
                 TdApi.Location l = new TdApi.Location(dlat, dlan);
-                TdApi.InputMessageLocation  m = new TdApi.InputMessageLocation(l, 10)  ;
+                TdApi.InputMessageLocation  m = new TdApi.InputMessageLocation(l, 60)  ;
 
                 TdApi.SendMessage request = new TdApi.SendMessage(PreferencesHelper.getChatId()
                         , rplId, false, false, null, m);
