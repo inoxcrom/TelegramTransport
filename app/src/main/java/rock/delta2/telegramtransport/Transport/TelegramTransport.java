@@ -7,6 +7,7 @@ import android.os.Build;
 import org.drinkless.td.libcore.telegram.Client;
 import org.drinkless.td.libcore.telegram.TdApi;
 
+import java.util.Calendar;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,6 +37,8 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
 
     long lastMsgId = 0;
+
+    long locationMsgId = 0;
 
     public TelegramTransport (Context c){
         _context = c;
@@ -166,6 +169,13 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
             }catch (Exception e)
             {
                 Helper.Ex2Log(e);
+            }
+        }
+        else if (object instanceof TdApi.UpdateChatLastMessage){
+            TdApi.UpdateChatLastMessage m = (TdApi.UpdateChatLastMessage) object;
+
+            if (m.lastMessage.content instanceof TdApi.MessageLocation){
+                locationMsgId = m.lastMessage.id;
             }
         }
         else if (object instanceof TdApi.UpdateNewMessage ) {
@@ -386,6 +396,8 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
         }
     }
 
+    long lastSendTime = 0;
+
     @Override
     public void sendLocation(String replMsgId, String lat, String lon) {
         if (!PreferencesHelper.getSendLocation())
@@ -408,11 +420,26 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
 
                 TdApi.Location l = new TdApi.Location(dlat, dlan);
-                TdApi.InputMessageLocation  m = new TdApi.InputMessageLocation(l, 60)  ;
 
-                TdApi.SendMessage request = new TdApi.SendMessage(PreferencesHelper.getChatId()
-                        , rplId, false, false, null, m);
-                send2t(request);
+                long currentTime = Calendar.getInstance().getTimeInMillis();
+
+                if(currentTime - lastSendTime > 120000 ) {
+                    TdApi.InputMessageLocation  m = new TdApi.InputMessageLocation(l, 86400)  ;
+                    TdApi.SendMessage request = new TdApi.SendMessage(PreferencesHelper.getChatId()
+                            , rplId, false, false, null, m);
+                    send2t(request);
+                }
+                else {
+                    TdApi.EditMessageLiveLocation request = new TdApi.EditMessageLiveLocation(
+                            PreferencesHelper.getChatId(),
+                            locationMsgId,
+                            null,
+                            l);
+
+                    send2t(request);
+                }
+
+                lastSendTime = currentTime;
 
             }
         } catch (Exception e) {
