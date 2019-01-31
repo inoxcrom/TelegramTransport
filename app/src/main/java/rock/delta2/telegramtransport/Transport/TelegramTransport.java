@@ -50,7 +50,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
     @Override
     public void onResult(TdApi.Object object) {
-        Helper.Log("tdlib onResult", object.toString());
+        Helper.Log("tdlib onResult", object.toString(), true);
 
         if (object instanceof TdApi.UpdateAuthorizationState) {
             TdApi.UpdateAuthorizationState state = (TdApi.UpdateAuthorizationState) object;
@@ -171,11 +171,19 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
                 Helper.Ex2Log(e);
             }
         }
-        else if (object instanceof TdApi.UpdateChatLastMessage){
-            TdApi.UpdateChatLastMessage m = (TdApi.UpdateChatLastMessage) object;
+        else if (object instanceof TdApi.UpdateMessageSendSucceeded){
+            TdApi.UpdateMessageSendSucceeded m = (TdApi.UpdateMessageSendSucceeded) object;
 
-            if (m.lastMessage.content instanceof TdApi.MessageLocation){
-                locationMsgId = m.lastMessage.id;
+            if (m.message.content instanceof TdApi.MessageLocation){
+                locationMsgId = m.message.id;
+            }
+        }
+        else if(object instanceof TdApi.UpdateDeleteMessages){
+            TdApi.UpdateDeleteMessages d = (TdApi.UpdateDeleteMessages)object;
+            for (long id : d.messageIds){
+                if(id == locationMsgId){
+                    locationMsgId = 0;
+                }
             }
         }
         else if (object instanceof TdApi.UpdateNewMessage ) {
@@ -423,7 +431,7 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
 
                 long currentTime = Calendar.getInstance().getTimeInMillis();
 
-                if(currentTime - lastSendTime > 120000 ) {
+                if(currentTime - lastSendTime > 120000 || locationMsgId == 0) {
                     TdApi.InputMessageLocation  m = new TdApi.InputMessageLocation(l, 86400)  ;
                     TdApi.SendMessage request = new TdApi.SendMessage(PreferencesHelper.getChatId()
                             , rplId, false, false, null, m);
@@ -435,7 +443,6 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
                             locationMsgId,
                             null,
                             l);
-
                     send2t(request);
                 }
 
