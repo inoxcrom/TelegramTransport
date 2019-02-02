@@ -6,6 +6,8 @@
     <string name="save">Save</string>
     <string name="close">Close</string>
 
+    <string name="minimize">minimize</string>
+
 
     <string name="send_code">Send this code from your main device \nfrom telegram to the registration number of the detector</string>
 
