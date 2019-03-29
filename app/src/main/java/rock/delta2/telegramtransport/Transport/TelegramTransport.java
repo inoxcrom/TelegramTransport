@@ -285,8 +285,8 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
     private void setConnectFlag(){
         if(!isSetConnectFlag /*&& _callback != null*/){
             isSetConnectFlag = true;
-       //     _callback.onConnectedTransport(true);
-       //     initTimertask();
+
+            initTimertask();
         }
     }
 
@@ -462,6 +462,13 @@ public class TelegramTransport implements ITransport , Client.ResultHandler, Cli
     }
     //endregion ITransport
 
+
+    private  void initTimertask(){
+        _TimerTask = new OnlineTimertask(this);
+        _Timer = new Timer();
+
+        _Timer.schedule(_TimerTask, 10000,  (int)(4.5 * 60 *1000));
+    }
 
     //----------------------------------------------------------------
 
